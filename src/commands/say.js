@@ -23,6 +23,7 @@ export const data = {
 export async function execute({ interaction }) {
   const attachment = Object.values(interaction.data.resolved?.attachments ?? {})[0];
   const content = interaction.data.options?.find(ctx => ctx.name == "content");
+  const reference = interaction.data.options.find(opt => opt.name == "reference");
   
   if (!attachment && !content) return new Response(JSON.stringify({
     type: InteractionResponseType.ChannelMessageWithSource,
@@ -31,13 +32,10 @@ export async function execute({ interaction }) {
     headers: { "content-type": "application/json" }
   });
   
-  const payload = { content: content.value };
-  const reference = interaction.data.options.find(opt => opt.name == "reference");
+  const payload = {};
   
-  if (reference) payload.message_reference = {
-    guild_id: interaction.guild_id,
-    message_id: reference.value
-  };
+  if (content) = payload.content = content;
+  if (reference) payload.message_reference = { guild_id: interaction.guild_id, message_id: reference.value };
   
   let body;
   const headers = new Headers();
