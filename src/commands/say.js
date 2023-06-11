@@ -14,7 +14,7 @@ export const data = {
   type: ApplicationCommandType.ChatInput,
   default_member_permissions: String(Number(PermissionFlagsBits.Administrator)),
   options: [
-    { name: "content", description: "🍜 · Ketik pesan~", type: ApplicationCommandOptionType.String, required: true },
+    { name: "content", description: "🍜 · Ketik pesan~", type: ApplicationCommandOptionType.String, required: false },
     { name: "attachment", description: "🍜 · Barangkali mau nitip file~ hehe", type: ApplicationCommandOptionType.Attachment, required: false },
     { name: "reference", description: "🍜 · ID pesan yang mau kamu balas~", type: ApplicationCommandOptionType.String, required: false }
   ]
@@ -22,7 +22,16 @@ export const data = {
 
 export async function execute({ interaction }) {
   const attachment = Object.values(interaction.data.resolved?.attachments ?? {})[0];
-  const payload = { content: interaction.data.options.find(ctx => ctx.name == "content").value };
+  const content = interaction.data.options.find(ctx => ctx.name == "content");
+  
+  if (!attachment && !content) return new Response(JSON.stringify({
+    type: InteractionResponseType.ChannelMessageWithSource,
+    data: { flags: MessageFlags.Ephemeral, content: "🦥 · Minimal pesannya ada isi lah~" }
+  }), {
+    headers: { "content-type": "application/json" }
+  });
+  
+  const payload = { content: content.value };
   const reference = interaction.data.options.find(opt => opt.name == "reference");
   
   if (reference) payload.message_reference = {
