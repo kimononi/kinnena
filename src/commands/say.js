@@ -34,7 +34,7 @@ export async function execute({ interaction }) {
   
   const payload = {};
   
-  if (content) = payload.content = content;
+  if (content) payload.content = content;
   if (reference) payload.message_reference = { guild_id: interaction.guild_id, message_id: reference.value };
   
   let body;
