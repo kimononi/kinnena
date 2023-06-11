@@ -23,5 +23,7 @@ export async function execute({ interaction }) {
   return new Response(JSON.stringify({
     type: InteractionResponseType.ChannelMessageWithSource,
     data: { content: "Hello World!" }
-  }))
+  }), {
+    headers: { "content-type": "application/json" }
+  })
 };
