@@ -21,8 +21,6 @@ export const data = {
 };
 
 export async function execute({ interaction }) {
-  console.log("say command executed.");
-  
   const attachment = Object.values(interaction.data.resolved?.attachments ?? {})[0];
   const payload = { content: interaction.data.options.find(ctx => ctx.name == "content").value };
   const reference = interaction.data.options.find(opt => opt.name == "reference");
@@ -56,13 +54,12 @@ export async function execute({ interaction }) {
     body
   })
     .then(res => res.json());
-  console.log(replyResult);
   
   return new Response(JSON.stringify({
     type: InteractionResponseType.ChannelMessageWithSource,
     data: {
       flags: MessageFlags.Ephemeral,
-      content: "Check logs."
+      content: ("code" in replyResult) ? `🍜 · Agak error dikit nih..\n\nJSON.stringify(replyResult, null, "  ")` : `🍜 · Done ya(⁠\\*⁠´⁠ω⁠｀\\⁠*⁠)! [https://discord.com/channels/${interaction.guild_id}/${interaction.channel_id}/${replyResult.id}]`
     }
   }), {
     headers: { "content-type": "application/json" }
