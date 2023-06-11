@@ -40,6 +40,8 @@ export async function execute({ interaction }) {
     const blob = await fetch(attachment.url)
       .then(res => res.blob());
     const formData = new FormData();
+    
+    formData.set("payload_json", JSON.stringify(payload));
     formData.set("files[0]", blob, attachment.filename);
     
     body = formData;
@@ -59,7 +61,8 @@ export async function execute({ interaction }) {
   return new Response(JSON.stringify({
     type: InteractionResponseType.ChannelMessageWithSource,
     data: {
-       content: "Check logs."
+      flags: MessageFlags.Ephemeral,
+      content: "Check logs."
     }
   }), {
     headers: { "content-type": "application/json" }
