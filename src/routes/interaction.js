@@ -1,4 +1,4 @@
-import { Status } from "http/status.ts";
+import { Status } from "http/http_status.ts";
 import { sign } from "https://cdn.skypack.dev/tweetnacl@1.0.3";
 
 import * as events from "../events/mod.js";
