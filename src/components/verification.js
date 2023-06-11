@@ -20,7 +20,6 @@ export async function execute({ requestEvent, interaction }) {
     .then(res => res.blob());
   
   const components = payload.answers.map((ctx, index) => toButton(ctx, index));
-  console.log(components);
   
   const payloadJSON = {
     type: InteractionResponseType.ChannelMessageWithSource,
