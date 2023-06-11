@@ -8,7 +8,7 @@ async function handler(request) {
   const deployment = Deno.env.get("DENO_DEPLOYMENT_ID");
   console.log(deployment, pathnames);
       
-  if (!pathnames[1].includes(deployment)) {
+  if (!requestURL.host.includes(deployment)) {
     const status = Status.Unauthorized;
     return new Response(
       JSON.stringify({
@@ -18,7 +18,7 @@ async function handler(request) {
     );
   } else {
     const route = Object.values(routes)
-      .find(ctx => ctx.data.pathname == pathnames[2] && ctx.data.method == request.method);
+      .find(ctx => ctx.data.pathname == pathnames[1] && ctx.data.method == request.method);
       console.log(route);
       if (route) return await route.execute(request);
     }
