@@ -10,7 +10,7 @@ export const data = {
   pathname: "deploy"
 };
 
-export async function execute(requestEvent) {
+export async function execute(request) {
   console.log("deploy route reached.");
   
   const clientId = Deno.env.get("DISCORD_ID");
