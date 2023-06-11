@@ -22,7 +22,7 @@ export const data = {
 
 export async function execute({ interaction }) {
   const attachment = Object.values(interaction.data.resolved?.attachments ?? {})[0];
-  const content = interaction.data.options.find(ctx => ctx.name == "content");
+  const content = interaction.data.options?.find(ctx => ctx.name == "content");
   
   if (!attachment && !content) return new Response(JSON.stringify({
     type: InteractionResponseType.ChannelMessageWithSource,
