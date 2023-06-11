@@ -1,9 +1,27 @@
-import {
-  Status,
-  serve
-} from "http/mod.ts";
+import { Status, serve } from "http/mod.ts";
+import * as routes from "./routes/mod.js";
 
-await serve(async (request) => {
-  const pathnames = request.url.pathname.split("/");
-  return new Response("Hello World!");
-});
+async function handler(request) {
+  const requestURL = new URL(request.url);
+  const pathnames = requestURL.pathname.split("/");
+      
+  const deployment = Deno.env.get("DENO_DEPLOYMENT_ID");
+  console.log(deployment, pathnames);
+      
+  if (!pathnames[1].includes(deployment)) {
+    const status = Status.Unauthorized;
+    return new Response(
+      JSON.stringify({
+        message: `This deployment is private, you need a deployment id to access the server (${status})`
+      }, null, "  "),
+      { status }
+    );
+  } else {
+    const route = Object.values(routes)
+      .find(ctx => ctx.data.pathname == pathnames[2] && ctx.data.method == request.method);
+      console.log(route);
+      if (route) return await route.execute(request);
+    }
+};
+
+serve(handler, { port: 80 });
