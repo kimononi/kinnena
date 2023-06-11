@@ -4,7 +4,7 @@ export const data = {
   method: "GET"
 };
 
-export async function execute(requestEvent) {
+export async function execute(request) {
   const filteredRoutes = Object.entries(routes)
     .filter(([key, ctx]) => ctx.data.method == "GET");
   //  && ctx.data.pathname !== "" < additional filter
