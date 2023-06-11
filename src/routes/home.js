@@ -1,7 +1,8 @@
 import * as routes from "./mod.js";
 
 export const data = {
-  method: "GET"
+  method: "GET",
+  pathname: ""
 };
 
 export async function execute(request) {
