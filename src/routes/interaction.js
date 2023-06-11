@@ -11,9 +11,9 @@ export const data = {
 export async function execute(request) {
   
   const publicKey = Deno.env.get("DISCORD_PUBLIC_KEY");
-  const body = await requestEvent.request.text();
-  const signature = requestEvent.request.headers.get("x-signature-ed25519");
-  const timestamp = requestEvent.request.headers.get("x-signature-timestamp");
+  const body = await request.text();
+  const signature = request.headers.get("x-signature-ed25519");
+  const timestamp = request.headers.get("x-signature-timestamp");
   
   const valid = await sign.detached.verify(
     new TextEncoder().encode(timestamp + body),
