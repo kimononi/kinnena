@@ -15,5 +15,10 @@ export async function execute({ request, interaction }) {
     .find(cmd => cmd.data.name == interaction.data.name && cmd.data.type == interaction.data.type);
   console.log(command);
   
-  if (command) return await command.execute({ request, interaction });
+  if (command) {
+    const response = await command.execute({ request, interaction });
+    console.log(response);
+    
+    return response;
+  }
 };
