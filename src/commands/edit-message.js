@@ -16,5 +16,12 @@ export const data = {
 };
 
 export async function execute({ interaction }) {
+  const clientId = Deno.env.get("DISCORD_ID");
   
+  if (interaction.data.member.user.id !== clientId) {
+    return new Response(JSON.stringify({
+      type: InteractionResponseType.ChannelMessageWithSource,
+      data: { flags: MessageFlags.Ephemeral, content: "🍜 · Itu bukan message punya gwe~" }
+    }));
+  }
 };
