@@ -16,6 +16,8 @@ export const data = {
 };
 
 export async function execute({ interaction }) {
+  console.log(interaction.data);
+  
   const clientId = Deno.env.get("DISCORD_ID");
   
   if (interaction.data.member.user.id !== clientId) {
