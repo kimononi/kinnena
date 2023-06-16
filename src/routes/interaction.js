@@ -5,7 +5,7 @@ import * as events from "../events/mod.js";
 
 export const data = {
   method: "POST",
-  pathname: "interaction"
+  pathname: "/interaction"
 };
 
 export async function execute({ branch, request }) {
