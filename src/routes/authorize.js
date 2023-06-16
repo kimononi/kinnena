@@ -35,6 +35,7 @@ export async function execute({ requestURL }) {
   body.set("redirect_uri", createAuthorizeURL(requestURL));
 
   const result = await fetch(OAuth2Routes.tokenURL, {
+    method: "POST",
     headers: { "content-type": "application/x-www-form-urlencoded" },
     body
   })
