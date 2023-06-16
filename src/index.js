@@ -1,4 +1,12 @@
-import { Status, serve } from "http/mod.ts";
+import {
+  Status,
+  serve 
+} from "http/mod.ts";
+
+import { 
+  OAuth2Routes
+} from "discord_api_types/v10.ts";
+
 import * as routes from "./routes/mod.js";
 
 async function handler(request) {
