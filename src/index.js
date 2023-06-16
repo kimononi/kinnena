@@ -20,7 +20,7 @@ async function handler(request) {
 
   if (!route) return new Response("Unknown endpoint.", { status: Status.NotFound });
 
-  if (route.requireAuth) {
+  if (route.data.requireAuth) {
     // base string url 
     // https://discord.com/api/oauth2/authorize?client_id=1114537750557892640&redirect_uri=https%3A%2F%2Fkinnena.deno.dev%2Fauth&response_type=code&scope=identify 
     
