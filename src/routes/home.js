@@ -5,7 +5,7 @@ export const data = {
   pathname: "/"
 };
 
-export async function execute(request) {
+export async function execute({ request, requestURL, branch }) {
   const filteredRoutes = Object.entries(routes)
     .filter(([key, ctx]) => ctx.data.method == "GET");
   
