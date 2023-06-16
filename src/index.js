@@ -19,20 +19,26 @@ async function handler(request) {
     .find(ctx => ctx.data.pathname == requestURL.pathname || ctx.data.pathname.startsWith(requestURL.pathname) && ctx.data.method == request.method);
 
   if (!route) return new Response("Unknown endpoint.", { status: Status.NotFound });
-
+  const executeData = { request, requestURL, branch };
+  
   if (route.data.requireAuth) {
-    // base string url 
-    // https://discord.com/api/oauth2/authorize?client_id=1114537750557892640&redirect_uri=https%3A%2F%2Fkinnena.deno.dev%2Fauth&response_type=code&scope=identify 
+    const { isAllowed } = getCookies(request.headers);
+    if (Boolean(isAllowed)) return await route.execute(executeData);
     
-    const authorizeURL = new URL(OAuth2Routes.authorizeURL);
     const scopes = [OAuth2Scopes.Identify];
-    // authorizeURL.searchParams.set();
+    const authorizeURL = new URL(OAuth2Routes.authorizeURL);
+
     authorizeURL.searchParams.set("client_id", Deno.env.get("PROD_DISCORD_ID"));
     authorizeURL.searchParams.set("redirect_uri", requestURL.origin + "/auth");
     authorizeURL.searchParams.set("response_type", "code");
     authorizeURL.searchParams.set("scope", scopes.join(" "));
 
-  } else return await route.execute({ request, requestURL, branch });
+    return new Response(null, {
+      headers: { location: authorizeURL },
+      status: Status.Found
+    });
+
+  } else return await route.execute(executeData);
 };
 
 serve(handler, { port: 80 });
