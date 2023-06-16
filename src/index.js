@@ -13,7 +13,7 @@ import * as routes from "./routes/mod.js";
 
 async function handler(request) {
   const requestURL = new URL(request.url);
-  const branch = (requestURL.host.includes("--") || requestURL.host.includes(Deno.env.get("DENO_DEPLOYMENT_ID"))) ? "CANARY" : "PROD";
+  const branch = requestURL.host.includes("--") || requestURL.host.includes(Deno.env.get("DENO_DEPLOYMENT_ID")) ? "CANARY" : "PROD";
 
   const route = Object.values(routes) 
     .find(ctx => ctx.data.pathname == requestURL.pathname || ctx.data.pathname.startsWith(requestURL.pathname) && ctx.data.method == request.method);
