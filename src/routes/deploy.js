@@ -12,8 +12,8 @@ export const data = {
 };
 
 export async function execute({ branch }) {
-  const clientId = Deno.env.get(branch + "DISCORD_ID");
-  const clientToken = Deno.env.get(branch + "DISCORD_TOKEN");
+  const clientId = Deno.env.get(`${branch}_DISCORD_ID`);
+  const clientToken = Deno.env.get(`${branch}_DISCORD_TOKEN`);
   
   const body = JSON.stringify(Object.values(commands)
     .map(command => command.data));
