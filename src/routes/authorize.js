@@ -1,4 +1,6 @@
 import {
+  RouteBases,
+  Routes,
   OAuth2Routes,
   OAuth2Scopes
 } from "discord_api_types/v10.ts";
