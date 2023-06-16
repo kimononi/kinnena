@@ -4,7 +4,7 @@ import {
   serve 
 } from "http/mod.ts";
 
-import { authorizeURL } from "./routes/authorize.js";
+import { createAuthorizeURL } from "./routes/authorize.js";
 
 import * as routes from "./routes/mod.js";
 
@@ -20,10 +20,10 @@ async function handler(request) {
   
   if (route.data.requireAuth) {
     const { isAllowed } = getCookies(request.headers);
-    if (isAllowed) return await route.execute(executeData);
+    if (isAllowed == "true") return await route.execute(executeData);
     
     return new Response(null, {
-      headers: { location: authorizeURL },
+      headers: { location: createAuthorizeURL(requestURL) },
       status: Status.Found
     });
 
