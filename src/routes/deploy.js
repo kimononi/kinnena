@@ -7,7 +7,7 @@ import * as commands from "../commands/mod.js";
 
 export const data = {
   method: "GET",
-  pathname: "deploy",
+  pathname: "/deploy",
   requireAuth: true
 };
 
