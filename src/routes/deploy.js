@@ -11,16 +11,12 @@ export const data = {
   requireAuth: true
 };
 
-export async function execute(request) {
-  console.log("deploy route reached.");
-  
-  const clientId = Deno.env.get("DISCORD_ID");
-  const clientToken = Deno.env.get("DISCORD_TOKEN");
+export async function execute({ branch }) {
+  const clientId = Deno.env.get(branch + "DISCORD_ID");
+  const clientToken = Deno.env.get(branch + "DISCORD_TOKEN");
   
   const body = JSON.stringify(Object.values(commands)
     .map(command => command.data));
-  
-  console.log(body);
   
   const deploy = await fetch(RouteBases.api + Routes.applicationCommands(clientId), {
     method: "PUT",
