@@ -26,7 +26,7 @@ async function handler(request) {
     if (Boolean(isAllowed)) return await route.execute(executeData);
     
     const scopes = [OAuth2Scopes.Identify];
-    const authorizeURL = new URL(OAuth2Routes.authorizeURL);
+    const authorizeURL = new URL(OAuth2Routes.authorizationURL);
 
     authorizeURL.searchParams.set("client_id", Deno.env.get("PROD_DISCORD_ID"));
     authorizeURL.searchParams.set("redirect_uri", requestURL.origin + "/auth");
