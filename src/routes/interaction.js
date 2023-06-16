@@ -10,7 +10,6 @@ export const data = {
 
 export async function execute({ branch, request }) {
   const publicKey = Deno.env.get(`${branch}_DISCORD_PUBLIC_KEY`);
-  console.log(publicKey);
   const body = await request.text();
   const signature = request.headers.get("x-signature-ed25519");
   const timestamp = request.headers.get("x-signature-timestamp");
