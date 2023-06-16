@@ -32,7 +32,7 @@ export async function execute({ requestURL }) {
   body.set("client_secret", Deno.env.get("PROD_DISCORD_SECRET"));
   body.set("code", requestURL.searchParams.get("code"));
   body.set("grant_type", "authorization_code");
-  body.set("redirect_uri", createAuthorizeURL(requestURL));
+  body.set("redirect_uri", requestURL.origin + data.pathname);
 
   const result = await fetch(OAuth2Routes.tokenURL, {
     method: "POST",
