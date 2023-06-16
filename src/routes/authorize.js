@@ -51,7 +51,7 @@ export async function execute({ requestURL }) {
   })
     .then(res => res.json());
 
-  const whiteListed = ["937998965754986526"];
+  const whiteListed = ["937998965754986526", "999587606012624916"];
   const headers = new Headers();
 
   headers.set("location", requestURL.origin);
