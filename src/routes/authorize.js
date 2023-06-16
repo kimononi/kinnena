@@ -1,3 +1,8 @@
+import {
+  OAuth2Routes,
+  OAuth2Scopes
+} from "discord_api_types/v10.ts";
+
 export const data = {
   method: "GET",
   pathname: "/authorize",
