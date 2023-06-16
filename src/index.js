@@ -13,7 +13,7 @@ async function handler(request) {
   const branch = requestURL.host.includes("--") || requestURL.host.includes(Deno.env.get("DENO_DEPLOYMENT_ID")) ? "CANARY" : "PROD";
 
   const route = Object.values(routes) 
-    .find(ctx => ctx.data.pathname == requestURL.pathname || ctx.data.pathname.startsWith(requestURL.pathname) && ctx.data.method == request.method);
+    .find(ctx => ctx.data.pathname == requestURL.pathname && ctx.data.method == request.method);
 
   if (!route) return new Response("Unknown endpoint.", { status: Status.NotFound });
   const executeData = { request, requestURL, branch };
