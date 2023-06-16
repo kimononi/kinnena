@@ -8,9 +8,9 @@ export const data = {
   pathname: "interaction"
 };
 
-export async function execute(request) {
+export async function execute({ branch, request }) {
   
-  const publicKey = Deno.env.get("DISCORD_PUBLIC_KEY");
+  const publicKey = Deno.env.get(branch + "DISCORD_PUBLIC_KEY");
   const body = await request.text();
   const signature = request.headers.get("x-signature-ed25519");
   const timestamp = request.headers.get("x-signature-timestamp");
@@ -29,7 +29,7 @@ export async function execute(request) {
     const event = Object.values(events)
       .find(ctx => ctx.data.type == interaction.type);
     
-    if (event) return await event.execute({ request, interaction });
+    if (event) return await event.execute({ branch, request, interaction });
   }
 };
 
