@@ -17,6 +17,8 @@ async function handler(request) {
 
   if (!route) return new Response("Unknown endpoint.", { status: Status.NotFound });
   const executeData = { request, requestURL, branch };
+
+  console.log(route.data);
   
   if (route.data.requireAuth) {
     const { isAllowed } = getCookies(request.headers);
