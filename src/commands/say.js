@@ -20,7 +20,7 @@ export const data = {
   ]
 };
 
-export async function execute({ interaction }) {
+export async function execute({ branch, interaction }) {
   const attachment = Object.values(interaction.data.resolved?.attachments ?? {})[0];
   const content = interaction.data.options?.find(ctx => ctx.name == "content");
   const reference = interaction.data.options?.find(opt => opt.name == "reference");
@@ -39,7 +39,7 @@ export async function execute({ interaction }) {
   
   let body;
   const headers = new Headers();
-  headers.set("authorization", `Bot ${Deno.env.get("DISCORD_TOKEN")}`);
+  headers.set("authorization", `Bot ${Deno.env.get(`${branch}_DISCORD_TOKEN`)}`);
   
   if (attachment) {
     const blob = await fetch(attachment.url)
