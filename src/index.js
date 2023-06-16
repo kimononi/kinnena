@@ -18,17 +18,16 @@ async function handler(request) {
   if (!route) return new Response("Unknown endpoint.", { status: Status.NotFound });
   const executeData = { request, requestURL, branch };
 
-  console.log(route.data);
-  
   if (route.data.requireAuth) {
     const { isAllowed } = getCookies(request.headers);
-    if (isAllowed == "true") return await route.execute(executeData);
     
-    return new Response(null, {
+    if (!isAllowed) return new Response(null, {
       headers: { location: createAuthorizeURL(requestURL) },
       status: Status.Found
     });
-
+    
+    if (isAllowed == "true") return await route.execute(executeData);
+    if (isAllowed == "false") return new Response("Looks like ur account isn't whitelisted, you can't use this endpoint, sorry.", { status: Status.Unauthorized });
   } else return await route.execute(executeData);
 };
 
