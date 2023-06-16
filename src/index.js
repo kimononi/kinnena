@@ -4,11 +4,6 @@ import {
   serve 
 } from "http/mod.ts";
 
-import { 
-  OAuth2Routes,
-  OAuth2Scopes,
-} from "discord_api_types/v10.ts";
-
 import * as routes from "./routes/mod.js";
 
 async function handler(request) {
@@ -23,15 +18,8 @@ async function handler(request) {
   
   if (route.data.requireAuth) {
     const { isAllowed } = getCookies(request.headers);
-    if (Boolean(isAllowed)) return await route.execute(executeData);
+    if (isAllowed) return await route.execute(executeData);
     
-    const scopes = [OAuth2Scopes.Identify];
-    const authorizeURL = new URL(OAuth2Routes.authorizationURL);
-
-    authorizeURL.searchParams.set("client_id", Deno.env.get("PROD_DISCORD_ID"));
-    authorizeURL.searchParams.set("redirect_uri", requestURL.origin + "/auth");
-    authorizeURL.searchParams.set("response_type", "code");
-    authorizeURL.searchParams.set("scope", scopes.join(" "));
 
     return new Response(null, {
       headers: { location: authorizeURL },
