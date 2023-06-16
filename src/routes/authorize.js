@@ -13,6 +13,7 @@ import {
 export const data = {
   method: "GET",
   pathname: "/authorize",
+  private: true
 };
 
 export function createAuthorizeURL(requestURL) {
