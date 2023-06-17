@@ -7,7 +7,7 @@ import {
 
 export const data = {
   method: "GET",
-  pathname: "/deploy",
+  pathname: "/test",
   requireAuth: true
 };
 
