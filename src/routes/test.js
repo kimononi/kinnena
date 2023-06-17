@@ -18,7 +18,7 @@ export async function execute({ branch }) {
     content: "# Verifikasi! {emoji}\n\n* Sebelum verifikasi, pastiin kamu sudah baca semua peraturan disini dan siap menerima peringatan atau tindakan dari admin apabila melanggar."
   });
   
-  const testResult = await fetch(RouteBases.api + Routes.channelMessages(""), {
+  const testResult = await fetch(RouteBases.api + Routes.channelMessages("1115194663872253992"), {
     method: "POST",
     headers: {
       authorization: `Bot ${clientToken}`,
