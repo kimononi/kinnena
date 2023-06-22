@@ -20,6 +20,7 @@ export async function execute({ branch, interaction }) {
   const creationTime = Date.now() - (Number(BigInt(interaction.member.user.id) >> 22n) + 1420070400000);
 
   const systems = [
+    { guildId: "950726336836689930", verificationRole: "950958525796995072", flaggeRole: "1121351594152296519", welcomeChannel: "950985159015010324" },
     { guildId: "1100208880132309022", verificationRole: "1119566549213266011", flaggedRole: "1121351938722758737", welcomeChannel: "1100211078203457628" }
   ];
 
