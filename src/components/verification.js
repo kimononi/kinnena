@@ -5,7 +5,7 @@ import {
 } from "discord_api_types/v10.ts";
 
 export const data = {
-  customd_id: "verification",
+  custom_id: "verification",
   type: ComponentType.Button
 };
 
