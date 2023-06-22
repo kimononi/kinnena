@@ -15,7 +15,17 @@ export async function execute({ branch }) {
   const clientToken = Deno.env.get(`${branch}_DISCORD_TOKEN`);
   
   const body = JSON.stringify({
-    content: "# Verifikasi! <:hutao_hug:1115203254771535903>\n** **\n* Sebelum verifikasi, pastiin kamu sudah baca semua <#969506184199540796> disini dan siap menerima peringatan atau tindakan dari admin apabila melanggar."
+    content: "# Verifikasi! <:hutao_hug:1115203254771535903>\n** **\n* Sebelum verifikasi, pastiin kamu sudah baca semua <#969506184199540796> disini dan siap menerima peringatan atau tindakan dari admin apabila melanggar.",
+    components: [{
+      type: ComponentType.ActionRow,
+      components: [{
+        type: ComponentType.Button,
+        custom_id: "verification",
+        style: ButtonStyle.Secondary,
+        label: "Utiwi~",
+        emoji: { animated: false, name: "hutao_drink", id: "1121352722332008480" }
+      }]
+    }]
   });
   
   const testResult = await fetch(RouteBases.api + Routes.channelMessages("1115194663872253992"), {
