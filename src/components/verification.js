@@ -57,6 +57,8 @@ export async function execute({ branch, interaction }) {
         flags: MessageFlags.Ephemeral,
         content: ("error" in result) ? `Wah, ada yang ga beres nih, tolong laporin bug ini ke moderator ya..\n\n${JSON.stringify(result, null, "    ")}` : "Arigatouu, thank you udah verifikasi, selamat bergabung~"
       }
-    }));
+    }), {
+      headers: { "content-type": "application/json" }
+    });
   }
 };
