@@ -11,6 +11,7 @@ export const data = {
 
 export async function execute({ branch, interaction }) {
   const minCreationTime = 24 * 60 * 60 * 1000;
+  const creationTime = Number(BigInt(interaction.member.user.id) >> 22n) + 0;
 
   const systems = [
     { guildId: "1100208880132309022", verificationRole: "1119566549213266011", flaggedRole: "1121351938722758737" }
@@ -19,7 +20,7 @@ export async function execute({ branch, interaction }) {
   const system = systems.find(ctx => ctx.guildId === interaction.guild_id);
   if (!system || interaction.member.roles.includes(system.verificationRole)) return;
 
-  if (interaction.member.roles.includes("")) return new Response(JSON.stringify({
+  if () return new Response(JSON.stringify({
     type: InteractionResponseType.ChannelMessageWithSource,
     data: {
       flags: MessageFlags.Ephemeral,
