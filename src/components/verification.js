@@ -63,7 +63,8 @@ export async function execute({ branch, interaction }) {
     if (success) await fetch(RouteBases.api + Routes.channelMessages(system.welcomeChannel), {
       method: "POST",
       headers: {
-        authorization: `Bot ${Deno.env.get(`${branch}_DISCORD_TOKEN`)}`
+        authorization: `Bot ${Deno.env.get(`${branch}_DISCORD_TOKEN`)}`,
+        "content-type": "application/json"
       },
       body: JSON.stringify({
         content: greetings[Math.floor(Math.random() * greetings.length)]
