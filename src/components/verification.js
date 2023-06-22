@@ -26,6 +26,6 @@ export async function execute({ branch, interaction }) {
       content: "belum disetup"
     }
   }), {
-    headers: { "content/type": "application/json" }
+    headers: { "content-type": "application/json" }
   });
 };
