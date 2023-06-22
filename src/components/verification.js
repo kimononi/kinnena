@@ -1,6 +1,8 @@
 import {
   ComponentType,
   InteractionResponseType,
+  RouteBases,
+  Routes,
   MessageFlags
 } from "discord_api_types/v10.ts";
 
@@ -24,7 +26,13 @@ export async function execute({ branch, interaction }) {
   const isFlagged = interaction.member.roles.includes(system.flaggedRole);
 
   if (isAlt || isFlagged) {
-    // if (!isFlagged)
+    if (!isFlagged) await fetch(RouteBases.api + Routes.guildMemberRole(interaction.guild_id, interaction.member.user.id, system.flaggedRole), {
+      method: "PUT",
+      headers: {
+        "authorization": `Bot ${branch}_DISCORD_TOKEN`
+      }
+    });
+    
     return new Response(JSON.stringify({
       type: InteractionResponseType.ChannelMessageWithSource,
       data: {
@@ -34,5 +42,7 @@ export async function execute({ branch, interaction }) {
     }), {
       headers: { "content-type": "application/json" }
     });
+  } else {
+
   }
 };
