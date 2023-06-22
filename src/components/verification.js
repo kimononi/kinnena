@@ -41,7 +41,7 @@ export async function execute({ branch, interaction }) {
       type: InteractionResponseType.ChannelMessageWithSource,
       data: {
         flags: MessageFlags.Ephemeral,
-        content: "* Kamu tidak bisa verifikasi <:hutao_sad:1121393237668663308>\nAkun kamu terdeteksi sebagai akun alt, karena dibuat "
+        content: "* Kamu tidak bisa verifikasi <:hutao_sad:1121393237668663308>\nAkun kamu terdeteksi sebagai akun alt karena dibuat dalam waktu yang cukup dekat\nSilahkan tag owner atau admin yang aktif untuk verifikasi secara manual."
       }
     }), {
       headers: { "content-type": "application/json" }
