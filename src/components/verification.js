@@ -50,6 +50,7 @@ export async function execute({ branch, interaction }) {
       }
     })
       .then(res => res.json());
+    console.log(result);
 
     return new Response(JSON.stringify({
       type: InteractionResponseType.ChannelMessageWithSource,
