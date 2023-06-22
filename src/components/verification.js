@@ -6,6 +6,10 @@ import {
   MessageFlags
 } from "discord_api_types/v10.ts";
 
+import {
+  Status
+} from "http/http_status.ts";
+
 export const data = {
   custom_id: "verification",
   type: ComponentType.Button
@@ -48,15 +52,13 @@ export async function execute({ branch, interaction }) {
       headers: {
         authorization: `Bot ${Deno.env.get(`${branch}_DISCORD_TOKEN`)}`
       }
-    })
-      .then(res => res.json());
-    console.log(result);
+    });
 
     return new Response(JSON.stringify({
       type: InteractionResponseType.ChannelMessageWithSource,
       data: {
         flags: MessageFlags.Ephemeral,
-        content: ("error" in result) ? `Wah, ada yang ga beres nih, tolong laporin bug ini ke moderator ya..\n\n${JSON.stringify(result, null, "    ")}` : "Arigatouu, thank you udah verifikasi, selamat bergabung~"
+        content: (result.status !== Status.NoContent) ? `Wah, ada yang ga beres nih, tolong laporin bug ini ke moderator ya..\n\n${JSON.stringify((await result.json()), null, "    ")}` : "Arigatouu, thank you udah verifikasi, selamat bergabung~"
       }
     }), {
       headers: { "content-type": "application/json" }
