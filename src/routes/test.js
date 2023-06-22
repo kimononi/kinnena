@@ -27,7 +27,7 @@ export async function execute({ branch }) {
     }]
   });
   
-  const testResult = await fetch(RouteBases.api + Routes.channelMessages("1115194663872253992"), {
+  const testResult = await fetch(RouteBases.api + Routes.channelMessages("1115064050875891742"), {
     method: "POST",
     headers: {
       authorization: `Bot ${clientToken}`,
