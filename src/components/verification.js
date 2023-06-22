@@ -56,7 +56,9 @@ export async function execute({ branch, interaction }) {
 
     const success = result.status == Status.NoContent;
     const greetings = [
-      `Arigatouuuu~ <@${interaction.member.user.id}>`
+      `Arigatouuuu~ <@${interaction.member.user.id}>, makasii udah join (⁠\\*⁠´⁠ω⁠｀⁠\\*⁠)`,
+      `Aloooo <@${interaction.member.user.id}>`,
+      `salken kak <@${interaction.member.user.id}>`
     ];
 
     if (success) await fetch(RouteBases.api + Routes.channelMessages(system.welcomeChannel), {
