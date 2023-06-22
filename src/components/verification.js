@@ -41,7 +41,7 @@ export async function execute({ branch, interaction }) {
       type: InteractionResponseType.ChannelMessageWithSource,
       data: {
         flags: MessageFlags.Ephemeral,
-        content: "belum disetup"
+        content: "maaf ya.. akun kamu terindikasi sebagai akun alternatif, akun kamu telah ditandai oleh bot, silahkan konfirmasi ke moderator untuk verifikasi secara manual"
       }
     }), {
       headers: { "content-type": "application/json" }
@@ -54,11 +54,27 @@ export async function execute({ branch, interaction }) {
       }
     });
 
+    const success = result.status == Status.NoContent;
+    const greetings = [
+      `Waa.. Welcome kak <@${interaction.member.user.id}>`,
+      `makasii udah join <@${interaction.member.user.id}>`
+    ];
+
+    if (success) await fetch(RouteBases.api + Routes.channelMessages(system.welcomeChannel), {
+      method: "POST",
+      headers: {
+        authorization: `Bot ${Deno.env.get(`${branch}_DISCORD_TOKEN`)}`
+      },
+      body: JSON.stringify({
+        content: greetings[Math.floor(Math.random() * greetings.length)]
+      })
+    })
+
     return new Response(JSON.stringify({
       type: InteractionResponseType.ChannelMessageWithSource,
       data: {
         flags: MessageFlags.Ephemeral,
-        content: (result.status !== Status.NoContent) ? `Wah, ada yang ga beres nih, tolong laporin bug ini ke moderator ya..\n\n${JSON.stringify((await result.json()), null, "    ")}` : "Arigatouu, thank you udah verifikasi, selamat bergabung~"
+        content: (!success) ? `Wah, ada yang ga beres nih, tolong laporin bug ini ke moderator ya..\n\n${JSON.stringify((await result.json()), null, "    ")}` : "Arigatouu, thank you udah verifikasi, selamat bergabung~"
       }
     }), {
       headers: { "content-type": "application/json" }
