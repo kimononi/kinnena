@@ -29,7 +29,7 @@ export async function execute({ branch, interaction }) {
     if (!isFlagged) await fetch(RouteBases.api + Routes.guildMemberRole(interaction.guild_id, interaction.member.user.id, system.flaggedRole), {
       method: "PUT",
       headers: {
-        "authorization": `Bot ${branch}_DISCORD_TOKEN`
+        "authorization": `Bot ${Deno.env.get(`${branch}_DISCORD_TOKEN`)}`
       }
     });
     
@@ -46,7 +46,7 @@ export async function execute({ branch, interaction }) {
     const result = await fetch(RouteBases.api + Routes.guildMemberRole(interaction.guild_id, interaction.member.user.id, system.verificationRole), {
       method: "PUT",
       headers: {
-        authorization: `Bot ${branch}_DISCORD_TOKEN`
+        authorization: `Bot ${Deno.env.get(`${branch}_DISCORD_TOKEN`)}`
       }
     })
       .then(res => res.json());
