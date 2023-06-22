@@ -15,7 +15,7 @@ export async function execute({ branch }) {
   const clientToken = Deno.env.get(`${branch}_DISCORD_TOKEN`);
   
   const body = JSON.stringify({
-    content: "# Verifikasi! <:hutao_hug:1115203254771535903>\n** **\n* Sebelum verifikasi, pastiin kamu sudah baca semua <#969506184199540796> disini dan siap menerima peringatan atau tindakan dari admin apabila melanggar.",
+    content: "## Kenshō~\n* Sebelum verifikasi, pastiin kamu sudah baca semua <#969506184199540796> disini dan siap menerima peringatan atau tindakan dari admin apabila melanggar.",
     components: [{
       type: ComponentType.ActionRow,
       components: [{
