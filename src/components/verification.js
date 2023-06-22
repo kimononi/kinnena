@@ -17,7 +17,7 @@ export const data = {
 
 export async function execute({ branch, interaction }) {
   const minCreationTime = 24 * 60 * 60 * 1000;
-  const creationTime = Date.now() + (Number(BigInt(interaction.member.user.id) >> 22n) + 1420070400000);
+  const creationTime = Date.now() - (Number(BigInt(interaction.member.user.id) >> 22n) + 1420070400000);
 
   const systems = [
     { guildId: "1100208880132309022", verificationRole: "1119566549213266011", flaggedRole: "1121351938722758737", welcomeChannel: "1100211078203457628" }
