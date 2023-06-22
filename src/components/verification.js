@@ -20,13 +20,19 @@ export async function execute({ branch, interaction }) {
   const system = systems.find(ctx => ctx.guildId === interaction.guild_id);
   if (!system || interaction.member.roles.includes(system.verificationRole)) return;
 
-  if () return new Response(JSON.stringify({
-    type: InteractionResponseType.ChannelMessageWithSource,
-    data: {
-      flags: MessageFlags.Ephemeral,
-      content: "belum disetup"
-    }
-  }), {
-    headers: { "content-type": "application/json" }
-  });
+  const isAlt = creationTime < minCreationTime;
+  const isFlagged = interaction.member.roles.includes(system.flaggedRole);
+
+  if (isAlt || isFlagged) {
+    // if (!isFlagged)
+    return new Response(JSON.stringify({
+      type: InteractionResponseType.ChannelMessageWithSource,
+      data: {
+        flags: MessageFlags.Ephemeral,
+        content: "belum disetup"
+      }
+    }), {
+      headers: { "content-type": "application/json" }
+    });
+  }
 };
